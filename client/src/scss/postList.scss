@@ -1,0 +1,44 @@
+.topics {
+    padding: 10px 20px;
+    background-color: #c4e4ff;
+    height: 100vh;
+    .list {
+        margin: 10px 20px;
+        li {
+            padding: 5px 0px;
+            &:hover {
+                cursor: pointer;
+                background-color: #3c5e7c;
+                color: whitesmoke;
+                border-radius: 3%;
+                margin: 5px 5px;
+                padding: 7px 10px;
+            }
+        }
+    }
+}
+
+.timeline {
+    padding: 10px 20px;
+    background-color: #579fdd;
+}
+
+.tags {
+    padding: 10px 20px;
+    background-color: #c4e4ff;
+    height: 100vh;
+    .list {
+        margin: 10px 20px;
+        li {
+            padding: 5px 0px;
+            &:hover {
+                cursor: pointer;
+                background-color: #3c5e7c;
+                color: whitesmoke;
+                border-radius: 3%;
+                margin: 5px 5px;
+                padding: 7px 10px;
+            }
+        }
+    }
+}

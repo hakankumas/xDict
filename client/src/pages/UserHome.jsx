@@ -1,9 +1,10 @@
 import React from "react";
+import PostList from "../components/PostList";
 
 function UserHome() {
     return (
         <div>
-            <div>User Home</div>
+            <PostList />
         </div>
     );
 }
