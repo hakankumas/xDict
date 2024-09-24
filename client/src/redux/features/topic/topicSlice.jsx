@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    topic: [],
+    topics: [],
 };
 
 export const getAllTopics = createAsyncThunk("topic/getAllTopics", async () => {
@@ -18,7 +18,7 @@ export const topicSlice = createSlice({
     // },
     extraReducers: (builder) => {
         builder.addCase(getAllTopics.fulfilled, (state, action) => {
-            state.topic = action.payload;
+            state.topics = action.payload;
         });
     },
 });

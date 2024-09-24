@@ -1,10 +1,10 @@
 import React from "react";
-import PostList from "../components/PostList";
+import Timeline from "../components/Timeline";
 
 function UserHome() {
     return (
         <div>
-            <PostList />
+            <Timeline />
         </div>
     );
 }

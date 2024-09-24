@@ -1,9 +1,12 @@
 import React from "react";
 
-function TopicItem({ topic_name }) {
+function TopicItem({ topic }) {
+    const { topic_name, slug } = topic;
     return (
         <div>
-            <li>{topic_name}</li>
+            <a href={`/topic/${slug}`}>
+                <li>{topic_name}</li>
+            </a>
         </div>
     );
 }

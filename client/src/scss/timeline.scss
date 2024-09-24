@@ -15,12 +15,27 @@
                 padding: 7px 10px;
             }
         }
+        a {
+            text-decoration: none;
+            color: black;
+        }
     }
 }
 
-.timeline {
-    padding: 10px 20px;
+.posts {
+    h1.title {
+        text-align: center;
+    }
+    padding: 10px 0px;
     background-color: #579fdd;
+    height: 100vh;
+    .list {
+        .card {
+            background-color: #4f8ec6;
+            margin: 15px 20px;
+            padding: 10px 20px;
+        }
+    }
 }
 
 .tags {

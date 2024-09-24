@@ -1,22 +1,25 @@
 import React from "react";
-
+import Grid from "@mui/material/Grid2";
+import { Container } from "@mui/material";
+import Topics from "./Topics";
+import Posts from "./Posts";
+import Tags from "./Tags";
 function Timeline() {
     return (
-        <div className="timeline">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor
-            delectus minus obcaecati eligendi. Numquam rerum corrupti ab animi
-            quisquam natus magni dignissimos adipisci. Incidunt mollitia,
-            inventore odit obcaecati animi consectetur!
-            <hr />
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor
-            delectus minus obcaecati eligendi. Numquam rerum corrupti ab animi
-            quisquam natus magni dignissimos adipisci. Incidunt mollitia,
-            inventore odit obcaecati animi consectetur!
-            <hr />
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor
-            delectus minus obcaecati eligendi. Numquam rerum corrupti ab animi
-            quisquam natus magni dignissimos adipisci. Incidunt mollitia,
-            inventore odit obcaecati animi consectetur!
+        <div>
+            <Container maxWidth="xl">
+                <Grid container spacing={1}>
+                    <Grid size={3}>
+                        <Topics />
+                    </Grid>
+                    <Grid size={6}>
+                        <Posts />
+                    </Grid>
+                    <Grid size={3}>
+                        <Tags />
+                    </Grid>
+                </Grid>
+            </Container>
         </div>
     );
 }

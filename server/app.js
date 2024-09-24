@@ -38,7 +38,7 @@ app.use("/post/add", async (req, res) => {
     res.status(200).json({ message: "Successfully created!", newPost });
 });
 app.use("/post/getAll", async (req, res) => {
-    const posts = await Post.find();
+    const posts = await Post.find().populate("user").populate("topic");
     if (!posts) return res.status(500).json({ status: "Failed!" });
     res.status(200).json({ status: "Successfully!", posts });
 });

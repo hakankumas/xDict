@@ -4,14 +4,14 @@ import { getAllTopics } from "../redux/features/topic/topicSlice";
 import TopicItem from "./TopicItem";
 function Topics() {
     // console.log("rerendered");
-    const { topic } = useSelector((state) => state.topic);
+    const { topics } = useSelector((state) => state.topic);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllTopics());
     }, []);
 
-    console.log(topic);
+    // console.log(topics);
 
     return (
         <div className="topics">
@@ -19,12 +19,9 @@ function Topics() {
             <hr />
             <div className="list">
                 <ul>
-                    {topic &&
-                        topic.map((item) => (
-                            <TopicItem
-                                key={item._id}
-                                topic_name={item.topic_name}
-                            />
+                    {topics &&
+                        topics.map((topic) => (
+                            <TopicItem key={topic._id} topic={topic} />
                         ))}
                 </ul>
             </div>
