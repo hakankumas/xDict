@@ -12,6 +12,8 @@ const userRoutes = require("./routes/user");
 app.use("/user", userRoutes);
 
 const Topic = require("./models/Topic");
+const Post = require("./models/Post");
+
 app.use("/topic/add", async (req, res) => {
     const { topic_name } = req.body;
     const newTopic = await Topic.create({
@@ -26,7 +28,15 @@ app.use("/topic/getAll", async (req, res) => {
     res.status(200).json({ status: "Successfully!", topics });
 });
 
-const Post = require("./models/Post");
+app.use("/topic/:slug", async (req, res) => {
+    const { slug } = req.params;
+    const { _id } = await Topic.findOne({ slug });
+    if (!_id) return res.status(500).json({ status: "Not found this topic!" });
+    const posts = await Post.find({ topic: _id });
+    if (!posts) return res.status(500).json({ status: "Failed!" });
+    res.status(200).json({ status: "Successfully!", posts });
+});
+
 app.use("/post/add", async (req, res) => {
     const { topic, content, user } = req.body;
     const newPost = await Post.create({
