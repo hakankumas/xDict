@@ -3,8 +3,6 @@ import React, { useEffect, useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-// import Hakan from "./pages/Hakan";
-
 import Header from "./components/Header";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
@@ -42,7 +40,7 @@ function App() {
             <Header sessionData={session} />
             <Routes>
                 <Route path="/" element={<Home />} />
-                {/* <Route path="/topic/:slug" element={<Hakan />} /> */}
+                <Route path="/topic/:slug" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
 

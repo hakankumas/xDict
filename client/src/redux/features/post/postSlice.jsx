@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
     posts: [],
+    filteredPosts: [],
 };
 
 export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
@@ -13,9 +14,13 @@ export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
 export const postSlice = createSlice({
     name: "post",
     initialState,
-    // reducers: {
-    //     xxx: (state) => {},
-    // },
+    reducers: {
+        postsTopic: (state, action) => {
+            state.filteredPosts = state.posts.filter(
+                (post) => post.topic.slug === action.payload
+            );
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(getAllPosts.fulfilled, (state, action) => {
             state.posts = action.payload;
@@ -23,5 +28,5 @@ export const postSlice = createSlice({
     },
 });
 
-// export const { xxx } = postSlice.actions;
+export const { postsTopic } = postSlice.actions;
 export default postSlice.reducer;
