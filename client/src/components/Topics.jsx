@@ -23,7 +23,7 @@ function Topics() {
             <h1
                 className={sessionData ? "new-topic" : null}
                 title={sessionData ? "Create a New Topic" : null}
-                onClick={handleToggle}
+                onClick={sessionData ? handleToggle : null}
             >
                 Topics
             </h1>
