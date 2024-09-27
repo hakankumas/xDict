@@ -2,6 +2,15 @@
     padding: 10px 20px;
     background-color: #c4e4ff;
     height: 100vh;
+    .new-topic {
+        margin-bottom: 10px;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 1px 1px 3px 1px black;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
     .list {
         margin: 10px 20px;
         li {

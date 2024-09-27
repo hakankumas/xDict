@@ -13,7 +13,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./components/Logout";
 
-import UserHome from "./pages/UserHome";
+// import UserHome from "./pages/_UserHome";
 import { isSession } from "./redux/features/auth/authSlice";
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
 
-                <Route path="/user/" element={<UserHome />} />
+                <Route path="/user/" element={<Home />} />
 
                 <Route path="*" element={<Error />} />
             </Routes>
