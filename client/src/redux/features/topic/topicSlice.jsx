@@ -10,18 +10,28 @@ export const getAllTopics = createAsyncThunk("topic/getAllTopics", async () => {
     return response.data.topics;
 });
 
+export const addTopic = createAsyncThunk("topic/add", async (condition) => {
+    const response = await axios.post(
+        "http://localhost:3000/topic/add",
+        condition
+    );
+    return response.data.newTopic;
+});
+
 export const topicSlice = createSlice({
     name: "topic",
     initialState,
-    // reducers: {
-    //     xxx: (state) => {},
-    // },
     extraReducers: (builder) => {
         builder.addCase(getAllTopics.fulfilled, (state, action) => {
             state.topics = action.payload;
-        });
+        }),
+            builder.addCase(addTopic.fulfilled, (state, action) => {
+                state.topics = [...state.topics, action.payload];
+            }),
+            builder.addCase(addTopic.rejected, (state, action) => {
+                console.log("Processing rejected.");
+            });
     },
 });
 
-// export const { xxx } = topicSlice.actions;
 export default topicSlice.reducer;
