@@ -17,4 +17,14 @@ const authenticateToken = asyncHandler(async (req, res, next) => {
     next();
 });
 
-module.exports = { authenticateToken };
+const authorizationToken = asyncHandler(async (req, res, next) => {
+    const token = req.body.token;
+
+    req.user = await User.findById(
+        jwt.verify(token, process.env.JWT_SECRET).id
+    );
+
+    next();
+});
+
+module.exports = { authenticateToken, authorizationToken };

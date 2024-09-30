@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 const Post = require("../models/Post");
 
 exports.add = asyncHandler(async (req, res) => {
-    const { topic, content, user } = req.body;
+    const { topic, content } = req.body;
+    const user = req.user;
     const newPost = await Post.create({
         user,
         topic,

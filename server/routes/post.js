@@ -4,7 +4,13 @@ const router = express.Router();
 // Controllers
 const postController = require("../controllers/post");
 
-router.post("/add", postController.add);
+// Middlewares
+const {
+    authenticateToken,
+    authorizationToken,
+} = require("../middlewares/authMiddleware");
+
+router.post("/add", authorizationToken, postController.add);
 router.get("/getAll", postController.getAll);
 
 module.exports = router;

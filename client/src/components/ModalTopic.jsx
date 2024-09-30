@@ -15,6 +15,7 @@ import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import axios from "axios";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -82,22 +83,35 @@ function ModalTopic({ show, setShow }) {
     }, [newTopic]);
 
     const [content, setContent] = useState("");
-    const [tag, setTag] = useState([]);
+    const ls_token = localStorage?.getItem("token");
+    // const [tag, setTag] = useState([]);
     const handleSubmit = () => {
-        console.log("handleSubmit");
-        // if (!topic || !content || !tag) {
-        //     alert("Please fill all the fields");
-        //     return;
-        // }
-        // setTopic(topic);
-        // setContent(content);
-        // setTag(tag);
-        // setShow(false);
-        // console.log({
-        //     topic,
-        //     content,
-        //     tag,
-        // });
+        if (!topic || !content) {
+            alert("Please fill all the fields");
+            return;
+        }
+        setTopic(topic);
+        setContent(content);
+        setShow(false);
+        console.log({
+            topic,
+            content,
+            token: ls_token,
+        });
+
+        const condition = {
+            topic,
+            content,
+            token: ls_token,
+        };
+        axios
+            .post("http://localhost:3000/post/add", condition)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -245,7 +259,7 @@ function ModalTopic({ show, setShow }) {
                                     />
                                 </Item>
 
-                                <Item sx={{ boxShadow: "none", padding: "0" }}>
+                                {/* <Item sx={{ boxShadow: "none", padding: "0" }}>
                                     <Autocomplete
                                         multiple
                                         id="checkboxes-tags-demo"
@@ -296,7 +310,7 @@ function ModalTopic({ show, setShow }) {
                                             />
                                         )}
                                     />
-                                </Item>
+                                </Item> */}
 
                                 <Item
                                     sx={{
