@@ -33,11 +33,16 @@
             border-radius: 10%;
         }
         .logout {
-            background-color: red;
-            opacity: 0.9;
-            color: whitesmoke;
+            border: 1px solid black;
             padding: 10%;
             border-radius: 10%;
+            &:hover {
+                cursor: pointer;
+                background-color: red;
+                color: whitesmoke;
+                border: none;
+                box-shadow: 1px 1px 3px 1px black;
+            }
         }
     }
 }
