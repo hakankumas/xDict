@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 import Topics from "./Topics";
 import Posts from "./Posts";
 import PostsTopic from "./PostsTopic";
-import Tags from "./Tags";
+import Profile from "./Profile";
 import { useParams } from "react-router-dom";
 function Timeline() {
     const { slug } = useParams();
@@ -17,7 +17,7 @@ function Timeline() {
                     </Grid>
                     <Grid size={6}>{slug ? <PostsTopic /> : <Posts />}</Grid>
                     <Grid size={3}>
-                        <Tags />
+                        <Profile />
                     </Grid>
                 </Grid>
             </Container>
