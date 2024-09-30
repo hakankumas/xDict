@@ -18,7 +18,13 @@ exports.add = asyncHandler(async (req, res) => {
 });
 
 exports.getAll = asyncHandler(async (req, res) => {
-    const posts = await Post.find().populate("user").populate("topic");
+    // const posts = await Post.find().populate("user").populate("topic");
+    const posts = await Post.aggregate([{ $sample: { size: 10 } }]); // Rastgele 10 post çekiliyor
+    const populatedPosts = await Post.populate(posts, [
+        { path: "user" },
+        { path: "topic" },
+    ]);
+
     if (!posts) return res.status(500).json({ status: "Failed!" });
     res.status(200).json({ status: "Successfully!", posts });
 });
