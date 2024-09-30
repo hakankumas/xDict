@@ -11,6 +11,14 @@ export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
     return response.data.posts;
 });
 
+export const addPost = createAsyncThunk("post/add", async (condition) => {
+    const response = await axios.post(
+        "http://localhost:3000/post/add",
+        condition
+    );
+    return response.data.newPost;
+});
+
 export const postSlice = createSlice({
     name: "post",
     initialState,
@@ -24,7 +32,10 @@ export const postSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getAllPosts.fulfilled, (state, action) => {
             state.posts = action.payload;
-        });
+        }),
+            builder.addCase(addPost.fulfilled, (state, action) => {
+                state.posts = [...state.posts, action.payload];
+            });
     },
 });
 

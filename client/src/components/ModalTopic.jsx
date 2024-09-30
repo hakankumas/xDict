@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import axios from "axios";
+import { addPost } from "../redux/features/post/postSlice";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -60,16 +60,7 @@ function ModalTopic({ show, setShow }) {
     const [newTopic, setNewTopic] = useState("");
     const [newTopicStatus, setNewTopicStatus] = useState("");
 
-    useEffect(() => {
-        console.log("topics", topics);
-    }, [topics]);
-
-    useEffect(() => {
-        if (topic) {
-            console.log("topic: ", topic.topic_name);
-        }
-    }, [topic]);
-
+    // Create a new topic
     useEffect(() => {
         setTopic("");
         if (newTopic) {
@@ -84,34 +75,20 @@ function ModalTopic({ show, setShow }) {
 
     const [content, setContent] = useState("");
     const ls_token = localStorage?.getItem("token");
-    // const [tag, setTag] = useState([]);
     const handleSubmit = () => {
-        if (!topic || !content) {
-            alert("Please fill all the fields");
-            return;
-        }
+        if (!topic || !content) return alert("Please fill all the fields");
+
         setTopic(topic);
         setContent(content);
-        setShow(false);
-        console.log({
-            topic,
-            content,
-            token: ls_token,
-        });
 
         const condition = {
             topic,
             content,
             token: ls_token,
         };
-        axios
-            .post("http://localhost:3000/post/add", condition)
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+
+        dispatch(addPost(condition));
+        setShow(false);
     };
 
     return (
