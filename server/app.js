@@ -9,49 +9,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
+const topicRoutes = require("./routes/topic");
+
 app.use("/user", userRoutes);
-
-const Topic = require("./models/Topic");
-const Post = require("./models/Post");
-
-app.use("/topic/add", async (req, res) => {
-    const { topic_name } = req.body;
-    const newTopic = await Topic.create({
-        topic_name,
-    });
-    if (!newTopic) return res.status(500).json({ status: "Failed!" });
-    res.status(200).json({ message: "Successfully created!", newTopic });
-});
-app.use("/topic/getAll", async (req, res) => {
-    const topics = await Topic.find();
-    if (!topics) return res.status(500).json({ status: "Failed!" });
-    res.status(200).json({ status: "Successfully!", topics });
-});
-
-app.use("/topic/:slug", async (req, res) => {
-    const { slug } = req.params;
-    const { _id } = await Topic.findOne({ slug });
-    if (!_id) return res.status(500).json({ status: "Not found this topic!" });
-    const posts = await Post.find({ topic: _id });
-    if (!posts) return res.status(500).json({ status: "Failed!" });
-    res.status(200).json({ status: "Successfully!", posts });
-});
-
-app.use("/post/add", async (req, res) => {
-    const { topic, content, user } = req.body;
-    const newPost = await Post.create({
-        user,
-        topic,
-        content,
-    });
-    if (!newPost) return res.status(500).json({ status: "Failed!" });
-    res.status(200).json({ message: "Successfully created!", newPost });
-});
-app.use("/post/getAll", async (req, res) => {
-    const posts = await Post.find().populate("user").populate("topic");
-    if (!posts) return res.status(500).json({ status: "Failed!" });
-    res.status(200).json({ status: "Successfully!", posts });
-});
+app.use("/post", postRoutes);
+app.use("/topic", topicRoutes);
 
 const PORT = process.env.PORT;
 const SERVER_URL = process.env.SERVER_URL;
