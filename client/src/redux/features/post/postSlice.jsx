@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
     posts: [],
     filteredPosts: [],
+    postsOfUser: [],
 };
 
 export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
@@ -28,6 +29,11 @@ export const postSlice = createSlice({
                 (post) => post.topic.slug === action.payload
             );
         },
+        postOfUser: (state, action) => {
+            state.postsOfUser = state.posts.filter(
+                (post) => post.user.username === action.payload
+            );
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getAllPosts.fulfilled, (state, action) => {
@@ -39,5 +45,5 @@ export const postSlice = createSlice({
     },
 });
 
-export const { postsTopic } = postSlice.actions;
+export const { postsTopic, postOfUser } = postSlice.actions;
 export default postSlice.reducer;

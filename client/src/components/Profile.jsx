@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import MentionItem from "./MentionItem";
+import { postOfUser } from "../redux/features/post/postSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
     fontFamily: "monospace",
@@ -13,6 +15,13 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: "center",
 }));
 function Profile() {
+    const { posts, postsOfUser } = useSelector((state) => state.post);
+    const dispatch = useDispatch();
+    const username = localStorage?.getItem("username");
+
+    useEffect(() => {
+        dispatch(postOfUser(username));
+    }, [posts]);
     return (
         <div className="profile">
             <Grid container>
@@ -39,7 +48,10 @@ function Profile() {
                             </Typography>
                         </Item>
                         <Item>
-                            <MentionItem />
+                            {postsOfUser &&
+                                postsOfUser.map((item) => (
+                                    <MentionItem key={item._id} item={item} />
+                                ))}
                         </Item>
                     </Stack>
                 </Grid>
