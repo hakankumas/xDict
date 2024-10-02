@@ -19,18 +19,20 @@
         margin: 1%;
         cursor: pointer;
         .register {
-            background-color: orangered;
-            opacity: 0.9;
-            color: black;
             padding: 5%;
-            border-radius: 10%;
+            &:hover {
+                background-color: #3c5e7c;
+                color: rgb(230, 230, 230);
+                border-radius: 10%;
+            }
         }
         .login {
-            background-color: blue;
-            opacity: 0.8;
-            color: whitesmoke;
             padding: 5%;
-            border-radius: 10%;
+            &:hover {
+                background-color: #3c5e7c;
+                color: rgb(230, 230, 230);
+                border-radius: 10%;
+            }
         }
         .logout {
             border: 1px solid black;
