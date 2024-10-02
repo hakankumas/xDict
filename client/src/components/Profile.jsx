@@ -7,6 +7,7 @@ import { styled } from "@mui/material/styles";
 import MentionItem from "./MentionItem";
 import { postOfUser } from "../redux/features/post/postSlice";
 import { useDispatch, useSelector } from "react-redux";
+import ProfileInfo from "./ProfileInfo";
 
 const Item = styled(Paper)(({ theme }) => ({
     fontFamily: "monospace",
@@ -27,18 +28,7 @@ function Profile() {
             <Grid container>
                 <Grid size={12}>
                     <Stack spacing={1} sx={{ marginTop: "1%" }}>
-                        <Item>
-                            <img
-                                src="https://randomuser.me/portraits/men/42.jpg"
-                                style={{ borderRadius: "50%" }}
-                            />
-                        </Item>
-                        <Item>
-                            <h4>Anakin Skywalker</h4>
-                        </Item>
-                        <Item>
-                            <h5>@skywalker</h5>
-                        </Item>
+                        <ProfileInfo />
                     </Stack>
 
                     <Stack spacing={1} sx={{ marginTop: "10%" }}>
