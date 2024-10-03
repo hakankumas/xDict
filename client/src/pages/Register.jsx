@@ -32,13 +32,11 @@ function Register() {
     const [password, setPassword] = useState("");
     const [statusText, setStatusText] = useState("");
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     const handleMouseUpPassword = (event) => {
         event.preventDefault();
     };
@@ -74,85 +72,6 @@ function Register() {
         <div>
             <Container maxWidth="xl">
                 <Grid container direction="row" spacing={6}>
-                    <Grid size={{ xs: 12, sm: 4, md: 7 }}>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: "100vh",
-                                backgroundColor: "#71bcd2",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                            }}
-                        >
-                            <Stack
-                                spacing={3}
-                                sx={{
-                                    padding: "70px",
-                                }}
-                            >
-                                <Item>
-                                    <Typography
-                                        sx={{
-                                            textAlign: "start",
-                                            fontWeight: "bold",
-                                            fontSize: "40px",
-                                        }}
-                                    >
-                                        xDict!
-                                    </Typography>
-                                </Item>
-                                <Item>
-                                    <Typography
-                                        sx={{
-                                            textAlign: "start",
-                                            fontWeight: "bold",
-                                            fontSize: "25px",
-                                        }}
-                                    >
-                                        Lorem ipsum dolor sit amet!
-                                    </Typography>
-                                </Item>
-                                <Item>
-                                    <Typography
-                                        sx={{
-                                            textAlign: "start",
-                                            fontSize: "17px",
-                                        }}
-                                    >
-                                        Rerum perspiciatis blanditiis nemo
-                                        tempora repellendus deserunt animi alias
-                                        quia at porro maxime. Consequatur,
-                                        quisquam natus?
-                                    </Typography>
-                                </Item>
-                                <Item>
-                                    <Typography
-                                        sx={{
-                                            textAlign: "start",
-                                            fontSize: "17px",
-                                        }}
-                                    >
-                                        Mollitia aliquam, nesciunt reiciendis
-                                        perspiciatis eaque dignissimos
-                                        blanditiis officia libero incidunt aut.
-                                    </Typography>
-                                </Item>
-                                <Item>
-                                    <Typography
-                                        sx={{
-                                            textAlign: "start",
-                                            fontSize: "17px",
-                                        }}
-                                    >
-                                        Aliquid ad nam cupiditate dolore nobis
-                                        asperiores rerum, odio reprehenderit
-                                        minima nihil sequi dicta corrupti!
-                                    </Typography>
-                                </Item>
-                            </Stack>
-                        </Box>
-                    </Grid>
                     <Grid
                         size={{ xs: 12, sm: 8, md: 5 }}
                         sx={{
@@ -283,6 +202,85 @@ function Register() {
                                 </Button>
                             </Item>
                         </form>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 4, md: 7 }}>
+                        <Box
+                            sx={{
+                                width: "100%",
+                                height: "100vh",
+                                backgroundColor: "#71bcd2",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Stack
+                                spacing={3}
+                                sx={{
+                                    padding: "70px",
+                                }}
+                            >
+                                <Item>
+                                    <Typography
+                                        sx={{
+                                            textAlign: "start",
+                                            fontWeight: "bold",
+                                            fontSize: "40px",
+                                        }}
+                                    >
+                                        xDict!
+                                    </Typography>
+                                </Item>
+                                <Item>
+                                    <Typography
+                                        sx={{
+                                            textAlign: "start",
+                                            fontWeight: "bold",
+                                            fontSize: "25px",
+                                        }}
+                                    >
+                                        Lorem ipsum dolor sit amet!
+                                    </Typography>
+                                </Item>
+                                <Item>
+                                    <Typography
+                                        sx={{
+                                            textAlign: "start",
+                                            fontSize: "17px",
+                                        }}
+                                    >
+                                        Rerum perspiciatis blanditiis nemo
+                                        tempora repellendus deserunt animi alias
+                                        quia at porro maxime. Consequatur,
+                                        quisquam natus?
+                                    </Typography>
+                                </Item>
+                                <Item>
+                                    <Typography
+                                        sx={{
+                                            textAlign: "start",
+                                            fontSize: "17px",
+                                        }}
+                                    >
+                                        Mollitia aliquam, nesciunt reiciendis
+                                        perspiciatis eaque dignissimos
+                                        blanditiis officia libero incidunt aut.
+                                    </Typography>
+                                </Item>
+                                <Item>
+                                    <Typography
+                                        sx={{
+                                            textAlign: "start",
+                                            fontSize: "17px",
+                                        }}
+                                    >
+                                        Aliquid ad nam cupiditate dolore nobis
+                                        asperiores rerum, odio reprehenderit
+                                        minima nihil sequi dicta corrupti!
+                                    </Typography>
+                                </Item>
+                            </Stack>
+                        </Box>
                     </Grid>
                 </Grid>
             </Container>
