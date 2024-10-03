@@ -9,7 +9,6 @@ function Posts() {
     useEffect(() => {
         dispatch(getAllPosts());
     }, []);
-    // console.log(posts);
     return (
         <div className="posts">
             <h1 className="title">Posts</h1>

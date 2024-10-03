@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { postsTopic } from "../redux/features/post/postSlice";
+import { getAllPosts, postsTopic } from "../redux/features/post/postSlice";
 import PostTopicItem from "./PostTopicItem";
 
 function PostsTopic() {
     const { slug } = useParams();
     const dispatch = useDispatch();
-    const { filteredPosts } = useSelector((state) => state.post);
+    const { posts, filteredPosts } = useSelector((state) => state.post);
 
     const title = filteredPosts[0]?.topic?.topic_name;
     useEffect(() => {
+        if (posts.length === 0) {
+            dispatch(getAllPosts());
+        }
         dispatch(postsTopic(slug));
-        slug && console.log(slug);
-        console.log(filteredPosts);
-    }, [slug]);
+    }, [posts, slug]);
 
     return (
         <div className="postsTopic">
