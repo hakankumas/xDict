@@ -74,7 +74,12 @@ function Login() {
     return (
         <div>
             <Container maxWidth="xl">
-                <Grid container direction="row" spacing={6}>
+                <Grid
+                    container
+                    direction="row"
+                    spacing={6}
+                    sx={{ padding: "0px", minWidth: "0px" }}
+                >
                     <Grid size={{ xs: 12, sm: 4, md: 7 }}>
                         <Box
                             sx={{

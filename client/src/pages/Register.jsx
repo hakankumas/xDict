@@ -71,7 +71,12 @@ function Register() {
     return (
         <div>
             <Container maxWidth="xl">
-                <Grid container direction="row" spacing={6}>
+                <Grid
+                    container
+                    direction="row"
+                    spacing={6}
+                    sx={{ padding: "0px", minWidth: "0px" }}
+                >
                     <Grid
                         size={{ xs: 12, sm: 8, md: 5 }}
                         sx={{
