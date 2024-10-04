@@ -10,7 +10,8 @@ const {
     authorizationToken,
 } = require("../middlewares/authMiddleware");
 
-router.post("/add", authorizationToken, postController.add);
 router.get("/getAll", postController.getAll);
+router.post("/add", authorizationToken, postController.add);
+router.post("/delete", authorizationToken, postController.delete);
 
 module.exports = router;

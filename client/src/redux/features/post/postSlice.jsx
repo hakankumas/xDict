@@ -20,6 +20,14 @@ export const addPost = createAsyncThunk("post/add", async (condition) => {
     return response.data.newPost;
 });
 
+export const deletePost = createAsyncThunk("post/delete", async (condition) => {
+    const response = await axios.post(
+        "http://localhost:3000/post/delete",
+        condition
+    );
+    return response.data.deletedPost;
+});
+
 export const postSlice = createSlice({
     name: "post",
     initialState,
@@ -41,6 +49,13 @@ export const postSlice = createSlice({
         }),
             builder.addCase(addPost.fulfilled, (state, action) => {
                 state.posts = [...state.posts, action.payload];
+            }),
+            builder.addCase(deletePost.fulfilled, (state, action) => {
+                state.posts = [
+                    ...state.posts.filter(
+                        (post) => post._id !== action.payload._id
+                    ),
+                ];
             });
     },
 });
