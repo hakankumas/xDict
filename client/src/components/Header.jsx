@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LuLogOut } from "react-icons/lu";
 function Header({ sessionData }) {
     // console.log("Header is rendered.");
     return (
@@ -16,7 +17,7 @@ function Header({ sessionData }) {
                     </div>
                     <div className="section2">
                         <Link className="link logout" to="/logout">
-                            Logout
+                            <LuLogOut />
                         </Link>
                     </div>
                 </>

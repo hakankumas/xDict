@@ -36,9 +36,12 @@
         }
         .logout {
             border: 1px solid black;
-            padding: 10%;
+            padding: 10% 20%;
+            margin: 0px 30px;
             border-radius: 10%;
+            opacity: 0.6;
             &:hover {
+                opacity: 1;
                 cursor: pointer;
                 background-color: red;
                 color: whitesmoke;
