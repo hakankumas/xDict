@@ -15,6 +15,7 @@ import Logout from "./components/Logout";
 
 // import UserHome from "./pages/_UserHome";
 import { isSession } from "./redux/features/auth/authSlice";
+import Footer from "./components/Footer";
 
 function App() {
     // console.log("App is rendered.");
@@ -52,6 +53,7 @@ function App() {
 
                 <Route path="*" element={<Error />} />
             </Routes>
+            <Footer />
         </div>
     );
 }
