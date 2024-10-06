@@ -35,3 +35,16 @@ exports.delete = asyncHandler(async (req, res) => {
     if (!deletedPost) return res.status(500).json({ status: "Failed!" });
     res.status(200).json({ message: "Successfully deleted!", deletedPost });
 });
+
+exports.update = asyncHandler(async (req, res) => {
+    const { _id, content } = req.body;
+    const updatedPost = await Post.findByIdAndUpdate(
+        _id,
+        { content },
+        { new: true }
+    )
+        .populate("user")
+        .populate("topic");
+    if (!updatedPost) return res.status(500).json({ status: "Failed!" });
+    res.status(200).json({ message: "Successfully updated!", updatedPost });
+});

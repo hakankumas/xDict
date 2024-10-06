@@ -13,5 +13,6 @@ const {
 router.get("/getAll", postController.getAll);
 router.post("/add", authorizationToken, postController.add);
 router.post("/delete", authorizationToken, postController.delete);
+router.post("/update", authorizationToken, postController.update);
 
 module.exports = router;

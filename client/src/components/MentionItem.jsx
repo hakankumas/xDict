@@ -12,12 +12,13 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 import { deletePost } from "../redux/features/post/postSlice";
 import ModalDeleteMentionItem from "./ModalDeleteMentionItem";
+import ModalUpdateMentionItem from "./ModalUpdateMentionItem";
 
 function MentionItem({ item }) {
     const { _id, topic, content, createdAt, updatedAt } = item;
     const ls_token = localStorage?.getItem("token");
 
-    const [editModal, setEditModal] = useState(false);
+    const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
     const dispatch = useDispatch();
@@ -63,7 +64,7 @@ function MentionItem({ item }) {
                     size="small"
                     color="success"
                     sx={{ minWidth: "0px" }}
-                    onClick={() => setEditModal(true)}
+                    onClick={() => setUpdateModal(true)}
                 >
                     <FaEdit size={20} />
                 </Button>
@@ -121,6 +122,11 @@ function MentionItem({ item }) {
                 deleteModal={deleteModal}
                 setDeleteModal={setDeleteModal}
                 handleDelete={handleDelete}
+            />
+            <ModalUpdateMentionItem
+                updateModal={updateModal}
+                setUpdateModal={setUpdateModal}
+                item={item}
             />
         </Card>
     );
