@@ -70,13 +70,13 @@ exports.updatePassword = asyncHandler(async (req, res) => {
     const isMatch = await bcrypt.compare(currentPassword, password);
     if (!isMatch)
         return res
-            .status(401)
+            .status(400)
             .json({ currentPasswordNotMatch: "currentPassword is wrong." });
 
     const isMatchNewAndCurrent = await bcrypt.compare(newPassword, password);
     if (isMatchNewAndCurrent)
         return res
-            .status(401)
+            .status(400)
             .json({ samePasswords: "Passwords are aldready same!" });
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
