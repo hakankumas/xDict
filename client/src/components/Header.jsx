@@ -5,14 +5,15 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
 import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import InfoIcon from "@mui/icons-material/Info";
+import SettingsIcon from "@mui/icons-material/Settings";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ModalPassword from "./ModalPassword";
 
 function Header({ sessionData }) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -24,7 +25,8 @@ function Header({ sessionData }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    console.log(anchorEl);
+
+    const [passwordModal, setPasswordModal] = useState(false);
 
     return (
         <div className="header">
@@ -82,20 +84,30 @@ function Header({ sessionData }) {
                                 }}
                             >
                                 <MenuList sx={{ p: 0 }}>
-                                    <Link className="link_dropdown" to="/info">
-                                        <MenuItem onClick={handleClose}>
-                                            <ListItemIcon>
-                                                <InfoIcon fontSize="small" />
-                                            </ListItemIcon>
-                                            <ListItemText primary="Info" />
-                                        </MenuItem>
-                                    </Link>
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <SettingsIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Settings" />
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <VisibilityIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="Password"
+                                            onClick={() =>
+                                                setPasswordModal(true)
+                                            }
+                                        />
+                                    </MenuItem>
                                     <Divider sx={{ my: 0.5 }} />
                                     <Link
                                         className="link_dropdown"
                                         to="/logout"
+                                        onClick={handleClose}
                                     >
-                                        <MenuItem onClick={handleClose}>
+                                        <MenuItem>
                                             <ListItemIcon>
                                                 <LogoutIcon fontSize="small" />
                                             </ListItemIcon>
@@ -105,6 +117,10 @@ function Header({ sessionData }) {
                                 </MenuList>
                             </Paper>
                         </Menu>
+                        <ModalPassword
+                            passwordModal={passwordModal}
+                            setPasswordModal={setPasswordModal}
+                        />
                     </div>
                 </>
             ) : (
