@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
 
@@ -28,4 +29,4 @@ function ProfilePhotoUpdate() {
     );
 }
 
-export default ProfilePhotoUpdate;
+export default React.memo(ProfilePhotoUpdate);

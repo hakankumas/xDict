@@ -1,15 +1,12 @@
-import Grid from "@mui/material/Grid2";
-
 import React from "react";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-
-import { Stack } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 const Item = styled(Paper)(({ theme }) => ({
     fontFamily: "monospace",
     boxShadow: "none",
@@ -102,4 +99,4 @@ function Footer() {
     );
 }
 
-export default Footer;
+export default React.memo(Footer);
