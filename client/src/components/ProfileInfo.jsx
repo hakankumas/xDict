@@ -14,16 +14,7 @@ function ProfileInfo() {
     const { user } = useSelector((state) => state.auth);
     return (
         <>
-            <Item
-                className="profile-photo-item"
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "relative",
-                }}
-            >
+            <Item className="profile-photo-item">
                 <img
                     src="https://randomuser.me/portraits/men/42.jpg"
                     className="profile-photo-img"

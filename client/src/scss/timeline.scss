@@ -71,21 +71,36 @@
     min-height: 100vh;
     height: 100%;
     .profile-photo-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
         .profile-photo-img {
+            display: block;
             border-radius: 50%;
             width: 125px;
             height: 125px;
         }
-        .profile-photo-change-icon {
-            color: lightgray;
-            width: 75px;
-            height: 75px;
+        .profile-photo-form {
             position: absolute;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            &:hover {
-                cursor: pointer;
-                opacity: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            .profile-photo-img-update {
+                display: none;
+            }
+            .profile-photo-change-icon {
+                color: lightgray;
+                width: 75px;
+                height: 75px;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+                &:hover {
+                    cursor: pointer;
+                    opacity: 1;
+                }
             }
         }
     }
