@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import { useSelector } from "react-redux";
-import { GrUpdate } from "react-icons/gr";
+import ProfilePhotoUpdate from "./ProfilePhotoUpdate";
+
 const Item = styled(Paper)(({ theme }) => ({
     fontFamily: "monospace",
     boxShadow: "none",
     backgroundColor: "transparent",
     textAlign: "center",
 }));
+
 function ProfileInfo() {
     const { user } = useSelector((state) => state.auth);
     return (
         <>
             <Item
+                className="profile-photo-item"
                 sx={{
                     display: "flex",
                     flexDirection: "row",
@@ -24,16 +26,9 @@ function ProfileInfo() {
             >
                 <img
                     src="https://randomuser.me/portraits/men/42.jpg"
-                    style={{
-                        borderRadius: "50%",
-                        width: "125px",
-                        height: "125px",
-                    }}
+                    className="profile-photo-img"
                 />
-                <GrUpdate
-                    className="profile-photo-change-icon"
-                    onClick={() => console.log("pp will change!")}
-                />
+                <ProfilePhotoUpdate />
             </Item>
             <Item>
                 <h5>@{user.username}</h5>
