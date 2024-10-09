@@ -1,7 +1,8 @@
 .topics {
     padding: 10px 20px;
     background-color: #c4e4ff;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     .new-topic {
         margin-bottom: 10px;
         &:hover {
@@ -33,6 +34,8 @@
 .posts {
     padding: 10px 0px;
     background-color: #579fdd;
+    min-height: 100vh;
+    height: 100%;
     h1.title {
         text-align: center;
     }
@@ -48,7 +51,8 @@
 .postsTopic {
     padding: 10px 0px;
     background-color: #579fdd;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     h1.title {
         text-align: center;
     }
@@ -64,7 +68,8 @@
 .profile {
     padding: 10px 20px;
     background-color: #c4e4ff;
-    height: auto;
+    min-height: 100vh;
+    height: 100%;
     .profile-photo-item {
         .profile-photo-img {
             border-radius: 50%;
