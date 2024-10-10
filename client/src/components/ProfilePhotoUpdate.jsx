@@ -1,25 +1,12 @@
 import React from "react";
-import { useState } from "react";
 import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
 
-function ProfilePhotoUpdate() {
-    const [selectedFile, setSelectedFile] = useState(null);
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-        // document.getElementById("profile-photo-form").submit();
-    };
-    const handleIconClick = () => {
-        document.getElementById("profile-photo").click(); // İkona tıklayınca input'u tetikle
-    };
-
-    console.log(selectedFile);
+function ProfilePhotoUpdate({ handleSubmit, handleIconClick }) {
     return (
         <div>
             <form
                 className="profile-photo-form"
                 id="profile-photo-form"
-                action="http://localhost:3000/user/pp-update"
-                method="POST"
                 encType="multipart/form-data"
             >
                 {/* Gizli dosya inputu */}
@@ -28,8 +15,7 @@ function ProfilePhotoUpdate() {
                     className="profile-photo-img-update"
                     id="profile-photo"
                     name="profile-photo"
-                    // style={{ display: "none" }}
-                    onChange={handleFileChange}
+                    onChange={handleSubmit}
                 />
                 <FileUploadRoundedIcon
                     className="profile-photo-change-icon"
