@@ -57,11 +57,12 @@ exports.login = asyncHandler(async (req, res) => {
 //     res.status(200).json({ status: "Successfully!", users });
 // });
 
-// exports.getUser = asyncHandler(async (req, res) => {
-//     const user = await User.findById(req.user._id);
-//     if (!user) return res.status(500).json({ status: "Failed!" });
-//     res.status(200).json({ message: "Successfully!", user });
-// });
+exports.getUser = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const user = await User.findById(_id);
+    if (!user) return res.status(500).json({ status: "Failed!" });
+    res.status(200).json({ message: "Successfully!", user });
+});
 
 exports.updatePassword = asyncHandler(async (req, res) => {
     const { _id, password } = req.user;
@@ -87,4 +88,17 @@ exports.updatePassword = asyncHandler(async (req, res) => {
     );
     if (!updatedPassword) return res.status(500).json({ status: "Failed!" });
     res.status(200).json({ message: "Successfully updated!", updatedPassword });
+});
+
+exports.update_pp = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { destination, filename } = req.file;
+    const new_pp_path = `${destination}/${filename}`;
+    const updated_pp = await User.findByIdAndUpdate(
+        _id,
+        { pp_path: new_pp_path },
+        { new: true }
+    );
+    if (!updated_pp) return res.status(500).json({ status: "Failed!" });
+    res.status(200).json({ message: "Successfully updated!", updated_pp });
 });

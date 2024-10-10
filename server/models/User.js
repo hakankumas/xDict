@@ -14,6 +14,10 @@ const UserSchema = mongoose.Schema(
             type: String,
             required: [true, "Please enter password!"],
         },
+        pp_path: {
+            type: String,
+            default: null,
+        },
     },
     {
         timestamps: true,
