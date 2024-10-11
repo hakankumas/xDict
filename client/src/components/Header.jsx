@@ -14,6 +14,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ModalPassword from "./ModalPassword";
+import ModalSettings from "./ModalSettings";
 
 function Header({ sessionData }) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -27,6 +28,7 @@ function Header({ sessionData }) {
     };
 
     const [passwordModal, setPasswordModal] = useState(false);
+    const [settingsModal, setSettingsModal] = useState(false);
 
     return (
         <div className="header">
@@ -88,7 +90,12 @@ function Header({ sessionData }) {
                                         <ListItemIcon>
                                             <SettingsIcon fontSize="small" />
                                         </ListItemIcon>
-                                        <ListItemText primary="Settings" />
+                                        <ListItemText
+                                            primary="Settings"
+                                            onClick={() =>
+                                                setSettingsModal(true)
+                                            }
+                                        />
                                     </MenuItem>
                                     <MenuItem onClick={handleClose}>
                                         <ListItemIcon>
@@ -120,6 +127,10 @@ function Header({ sessionData }) {
                         <ModalPassword
                             passwordModal={passwordModal}
                             setPasswordModal={setPasswordModal}
+                        />
+                        <ModalSettings
+                            settingsModal={settingsModal}
+                            setSettingsModal={setSettingsModal}
                         />
                     </div>
                 </>
