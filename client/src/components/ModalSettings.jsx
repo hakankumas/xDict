@@ -36,8 +36,6 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
     const [telephone, setTelephone] = useState("");
     const [aboutme, setAboutme] = useState("");
 
-    const [isUpdate, setIsUpdate] = useState(false);
-
     const handleUpdate = async () => {
         try {
             const response = await axios.post(
@@ -55,7 +53,6 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
                 }
             );
             setSettingsModal(false);
-            setIsUpdate(true);
             enqueueSnackbar("Updated successfully!", {
                 variant: "success",
                 anchorOrigin: {
@@ -93,21 +90,17 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
         } catch (error) {
             console.log(error);
         }
-        setIsUpdate(false);
     };
     useEffect(() => {
-        getData();
-    }, [isUpdate]);
+        if (settingsModal) {
+            getData();
+        }
+    }, [settingsModal]);
 
     return (
         <Modal
             open={settingsModal}
-            onClose={() => {
-                setEmail("");
-                setTelephone("");
-                setAboutme("");
-                setSettingsModal(false);
-            }}
+            onClose={() => setSettingsModal(false)}
             aria-labelledby="parent-modal-title"
             aria-describedby="parent-modal-description"
         >
@@ -126,7 +119,7 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
                             label="Email"
                             variant="outlined"
                             sx={{ width: "100%" }}
-                            value={email !== null ? email : ""}
+                            value={email || ""}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </Item>
@@ -135,7 +128,7 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
                             label="Telephone"
                             variant="outlined"
                             sx={{ width: "100%" }}
-                            value={telephone !== null ? telephone : ""}
+                            value={telephone || ""}
                             onChange={(e) => setTelephone(e.target.value)}
                         />
                     </Item>
@@ -147,7 +140,7 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
                             multiline
                             minRows={3}
                             maxRows={7}
-                            value={aboutme !== null ? aboutme : ""}
+                            value={aboutme || ""}
                             onChange={(e) => setAboutme(e.target.value)}
                         />
                     </Item>

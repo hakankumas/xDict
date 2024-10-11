@@ -30,6 +30,15 @@ function Header({ sessionData }) {
     const [passwordModal, setPasswordModal] = useState(false);
     const [settingsModal, setSettingsModal] = useState(false);
 
+    const handleOpenSettingsModal = () => {
+        setSettingsModal(true);
+        handleClose();
+    };
+
+    const handleOpenPasswordModal = () => {
+        setPasswordModal(true);
+        handleClose();
+    };
     return (
         <div className="header">
             {sessionData ? (
@@ -86,27 +95,17 @@ function Header({ sessionData }) {
                                 }}
                             >
                                 <MenuList sx={{ p: 0 }}>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleOpenSettingsModal}>
                                         <ListItemIcon>
                                             <SettingsIcon fontSize="small" />
                                         </ListItemIcon>
-                                        <ListItemText
-                                            primary="Settings"
-                                            onClick={() =>
-                                                setSettingsModal(true)
-                                            }
-                                        />
+                                        <ListItemText primary="Settings" />
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleOpenPasswordModal}>
                                         <ListItemIcon>
                                             <VisibilityIcon fontSize="small" />
                                         </ListItemIcon>
-                                        <ListItemText
-                                            primary="Password"
-                                            onClick={() =>
-                                                setPasswordModal(true)
-                                            }
-                                        />
+                                        <ListItemText primary="Password" />
                                     </MenuItem>
                                     <Divider sx={{ my: 0.5 }} />
                                     <Link
