@@ -32,17 +32,17 @@ exports.login = asyncHandler(async (req, res) => {
     res.status(200).json({ status: "Successfully logged in!", user, token });
 });
 
-// exports.update = asyncHandler(async (req, res) => {
-//     const { id } = req.params;
-//     const { username } = req.body;
-//     const updatedUser = await User.findByIdAndUpdate(
-//         id,
-//         { username },
-//         { new: true }
-//     );
-//     if (!updatedUser) return res.status(500).json({ status: "Failed!" });
-//     res.status(200).json({ status: "Successfully updated!", updatedUser });
-// });
+exports.update = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { email, telephone, aboutme } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+        _id,
+        { email, telephone, aboutme },
+        { new: true }
+    );
+    if (!updatedUser) return res.status(500).json({ status: "Failed!" });
+    res.status(200).json({ status: "Successfully updated!", updatedUser });
+});
 
 // exports.delete = asyncHandler(async (req, res) => {
 //     const { id } = req.params;

@@ -18,6 +18,14 @@ const UserSchema = mongoose.Schema(
             type: String,
             default: null,
         },
+        telephone: {
+            type: Number,
+            default: null,
+        },
+        aboutme: {
+            type: String,
+            default: null,
+        },
     },
     {
         timestamps: true,
