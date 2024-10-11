@@ -13,6 +13,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { deletePost } from "../redux/features/post/postSlice";
 import ModalDeleteMentionItem from "./ModalDeleteMentionItem";
 import ModalUpdateMentionItem from "./ModalUpdateMentionItem";
+import useDateReturn from "../hooks/useDateReturn";
 
 function MentionItem({ item }) {
     const { _id, topic, content, createdAt, updatedAt } = item;
@@ -32,24 +33,9 @@ function MentionItem({ item }) {
         setDeleteModal(false);
     };
 
-    const nfd_createdAt = new Date(createdAt);
-    const new_createdAt = nfd_createdAt.toLocaleDateString("tr-TR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-    });
-
-    const nfd_updatedAt = new Date(updatedAt);
-    const new_updatedAt = nfd_updatedAt.toLocaleDateString("tr-TR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+    const { new_createdAt, new_updatedAt } = useDateReturn({
+        createdAt,
+        updatedAt,
     });
 
     return (

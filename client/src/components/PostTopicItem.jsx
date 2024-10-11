@@ -1,25 +1,11 @@
 import React from "react";
+import useDateReturn from "../hooks/useDateReturn";
 
 function PostTopicItem({ post }) {
     const { content, user, createdAt, updatedAt } = post;
-    const nfd_createdAt = new Date(createdAt);
-    const new_createdAt = nfd_createdAt.toLocaleDateString("tr-TR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-    });
-
-    const nfd_updatedAt = new Date(updatedAt);
-    const new_updatedAt = nfd_updatedAt.toLocaleDateString("tr-TR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+    const { new_createdAt, new_updatedAt } = useDateReturn({
+        createdAt,
+        updatedAt,
     });
     return (
         <div className="card">
