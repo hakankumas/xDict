@@ -18,17 +18,24 @@ function PostsTopic() {
     }, [posts, slug]);
 
     return (
-        <div className="postsTopic">
-            <h1 className="title">{title}</h1>
-            <hr />
-            <div className="list">
-                <ul>
-                    {filteredPosts &&
-                        filteredPosts.map((post) => (
-                            <PostTopicItem key={post._id} post={post} />
-                        ))}
-                </ul>
-            </div>
+        <div
+            className="postsTopic"
+            style={{ backgroundColor: title ? "#579fdd" : "#0D92F4" }}
+        >
+            <h1 className="title">{title ? title : "Post Not Found!"}</h1>
+            {title && (
+                <>
+                    <hr />
+                    <div className="list">
+                        <ul>
+                            {filteredPosts &&
+                                filteredPosts.map((post) => (
+                                    <PostTopicItem key={post._id} post={post} />
+                                ))}
+                        </ul>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
