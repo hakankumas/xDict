@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { useEffect } from "react";
+import api from "../../../utils/api";
 
 const initialState = {
     user: {},
@@ -12,10 +11,7 @@ export const login = createAsyncThunk(
     "auth/login",
     async (condition, { rejectWithValue }) => {
         try {
-            const response = await axios.post(
-                "http://localhost:3000/user/login",
-                condition
-            );
+            const response = await api().post("/user/login", condition);
             const username = response.data.user.username;
             const token = response.data.token;
             const message = response.data.status;

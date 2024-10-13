@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import { Stack, TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -38,8 +38,8 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
 
     const handleUpdate = async () => {
         try {
-            const response = await axios.post(
-                "http://localhost:3000/user/update",
+            const response = await api().post(
+                "/user/update",
                 {
                     email,
                     telephone,
@@ -75,15 +75,12 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
 
     const getData = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:3000/user/get-user",
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${ls_token}`,
-                    },
-                }
-            );
+            const response = await api().get("/user/get-user", {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${ls_token}`,
+                },
+            });
             setEmail(response.data.user.email);
             setTelephone(response.data.user.telephone);
             setAboutme(response.data.user.aboutme);

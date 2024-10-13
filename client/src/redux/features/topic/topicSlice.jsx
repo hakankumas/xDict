@@ -1,20 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import api from "../../../utils/api";
 const initialState = {
     topics: [],
 };
 
 export const getAllTopics = createAsyncThunk("topic/getAllTopics", async () => {
-    const response = await axios.get("http://localhost:3000/topic/getAll");
+    const response = await api().get("/topic/getAll");
     return response.data.topics;
 });
 
 export const addTopic = createAsyncThunk("topic/add", async (condition) => {
-    const response = await axios.post(
-        "http://localhost:3000/topic/add",
-        condition
-    );
+    const response = await api().post("/topic/add", condition);
     return response.data.newTopic;
 });
 

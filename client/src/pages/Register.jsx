@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import Grid from "@mui/material/Grid2";
 import {
     Box,
@@ -54,8 +54,8 @@ function Register() {
             username,
             password,
         };
-        axios
-            .post("http://localhost:3000/user/register", query)
+        api()
+            .post("/user/register", query)
             .then((res) => {
                 setStatusText(res.data.message);
             })

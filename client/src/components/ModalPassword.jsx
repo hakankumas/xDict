@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import { Stack, TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -51,8 +51,8 @@ function ModalPassword({ passwordModal, setPasswordModal }) {
             newPassword,
             currentPassword,
         };
-        await axios
-            .post("http://localhost:3000/user/updatePassword", condition)
+        await api()
+            .post("/user/updatePassword", condition)
             .then(() => {
                 setPasswordModal(false);
                 setNewPassword("");

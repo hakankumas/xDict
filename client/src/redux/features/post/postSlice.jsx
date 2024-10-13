@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../../utils/api";
 
 const initialState = {
     posts: [],
@@ -8,31 +8,22 @@ const initialState = {
 };
 
 export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
-    const response = await axios.get("http://localhost:3000/post/getAll");
+    const response = await api().get("/post/getAll");
     return response.data.posts;
 });
 
 export const addPost = createAsyncThunk("post/add", async (condition) => {
-    const response = await axios.post(
-        "http://localhost:3000/post/add",
-        condition
-    );
+    const response = await api().post("/post/add", condition);
     return response.data.newPost;
 });
 
 export const deletePost = createAsyncThunk("post/delete", async (condition) => {
-    const response = await axios.post(
-        "http://localhost:3000/post/delete",
-        condition
-    );
+    const response = await api().post("/post/delete", condition);
     return response.data.deletedPost;
 });
 
 export const updatePost = createAsyncThunk("post/update", async (condition) => {
-    const response = await axios.post(
-        "http://localhost:3000/post/update",
-        condition
-    );
+    const response = await api().post("/post/update", condition);
     return response.data.updatedPost;
 });
 

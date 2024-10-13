@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import api from "../utils/api";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import axios from "axios";
-import { useState } from "react";
 import ProfilePhotoUpdate from "./ProfilePhotoUpdate";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -30,16 +29,12 @@ function ProfileInfo() {
             const formData = new FormData();
             formData.append("profile-photo", selectedFile);
             try {
-                const response = await axios.post(
-                    "http://localhost:3000/user/update-pp",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                            Authorization: `Bearer ${ls_token}`,
-                        },
-                    }
-                );
+                const response = await api().post("/user/update-pp", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${ls_token}`,
+                    },
+                });
                 setUserProfilePhoto(
                     import.meta.env.VITE_SERVER_URL + response.data.user.pp_path
                 );
@@ -49,8 +44,8 @@ function ProfileInfo() {
         }
     };
     const getData = () => {
-        axios
-            .get("http://localhost:3000/user/get-user", {
+        api()
+            .get("/user/get-user", {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${ls_token}`,
