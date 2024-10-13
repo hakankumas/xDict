@@ -10,9 +10,22 @@ const authenticateToken = asyncHandler(async (req, res, next) => {
         return res.status(401).json({ message: "Not authorized" });
     }
 
-    req.user = await User.findById(
-        jwt.verify(token, process.env.JWT_SECRET).id
-    );
+    // req.user = await User.findById(
+    //     jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
+    //         if (err) return "token expired";
+    //         return res;
+    //     }).id
+    // );
+    try {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = await User.findById(decodedToken.id);
+    } catch (err) {
+        if (err.name === "TokenExpiredError") {
+            return res.status(401).json({ message: "Token expired" });
+        } else {
+            return res.status(401).json({ message: "Invalid token" });
+        }
+    }
 
     next();
 });
@@ -20,9 +33,20 @@ const authenticateToken = asyncHandler(async (req, res, next) => {
 const authorizationToken = asyncHandler(async (req, res, next) => {
     const token = req.body.token;
 
-    req.user = await User.findById(
-        jwt.verify(token, process.env.JWT_SECRET).id
-    );
+    // req.user = await User.findById(
+    //     jwt.verify(token, process.env.JWT_SECRET).id
+    // );
+
+    try {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = await User.findById(decodedToken.id);
+    } catch (err) {
+        if (err.name === "TokenExpiredError") {
+            return res.status(401).json({ message: "Token expired" });
+        } else {
+            return res.status(401).json({ message: "Invalid token" });
+        }
+    }
 
     next();
 });
