@@ -5,6 +5,7 @@ import PostItem from "./PostItem";
 
 function Posts() {
     const { posts } = useSelector((state) => state.post);
+    const randomizePosts = [...posts].sort(() => Math.random() - 0.5);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllPosts());
@@ -15,8 +16,8 @@ function Posts() {
             <hr />
             <div className="list">
                 <ul>
-                    {posts &&
-                        posts.map((post) => (
+                    {randomizePosts &&
+                        randomizePosts.map((post) => (
                             <PostItem key={post._id} post={post} />
                         ))}
                 </ul>
