@@ -2,19 +2,16 @@ import "./scss/index.scss";
 import React, { useEffect, useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { isSession } from "./redux/features/auth/authSlice";
 
 import Header from "./components/Header";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
-
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./components/Logout";
-
-// import UserHome from "./pages/_UserHome";
-import { isSession } from "./redux/features/auth/authSlice";
 import Footer from "./components/Footer";
 
 function App() {
