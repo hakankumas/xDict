@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTopic } from "../redux/features/topic/topicSlice";
+import { addPost } from "../redux/features/post/postSlice";
+import { useCustomSnackBar } from "../hooks/useCustomSnackBar";
 
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -15,7 +17,6 @@ import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { addPost } from "../redux/features/post/postSlice";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -53,6 +54,8 @@ const tags = [
 ];
 
 function ModalTopic({ show, setShow }) {
+    const { snackBar_success, snackBar_error } = useCustomSnackBar();
+
     const { topics } = useSelector((state) => state.topic);
     const dispatch = useDispatch();
 
@@ -64,12 +67,17 @@ function ModalTopic({ show, setShow }) {
     useEffect(() => {
         setTopic("");
         if (newTopic) {
-            const condition = {
-                topic_name: newTopic,
-            };
-            console.log("newTopic: ", condition.topic_name);
-            dispatch(addTopic(condition));
-            setNewTopicStatus(`Successfully created: ${newTopic}`);
+            try {
+                const condition = {
+                    topic_name: newTopic,
+                };
+                console.log("newTopic: ", condition.topic_name);
+                dispatch(addTopic(condition));
+                setNewTopicStatus(`Successfully created: ${newTopic}`);
+                snackBar_success();
+            } catch (error) {
+                snackBar_error();
+            }
         }
     }, [newTopic]);
 
@@ -77,17 +85,19 @@ function ModalTopic({ show, setShow }) {
     const ls_token = localStorage?.getItem("token");
     const handleSubmit = () => {
         if (!topic || !content) return alert("Please fill all the fields");
-
-        setTopic(topic);
-        setContent(content);
-
-        const condition = {
-            topic,
-            content,
-            token: ls_token,
-        };
-
-        dispatch(addPost(condition));
+        try {
+            setTopic(topic);
+            setContent(content);
+            const condition = {
+                topic,
+                content,
+                token: ls_token,
+            };
+            dispatch(addPost(condition));
+            snackBar_success();
+        } catch (error) {
+            snackBar_error();
+        }
         setShow(false);
     };
 

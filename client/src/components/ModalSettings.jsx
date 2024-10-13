@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useSnackbar } from "notistack";
+import { useCustomSnackBar } from "../hooks/useCustomSnackBar";
 const style = {
     position: "absolute",
     top: "50%",
@@ -30,7 +30,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ModalSettings({ settingsModal, setSettingsModal }) {
-    const { enqueueSnackbar } = useSnackbar();
+    const { snackBar_success, snackBar_error } = useCustomSnackBar();
     const ls_token = localStorage?.getItem("token");
     const [email, setEmail] = useState("");
     const [telephone, setTelephone] = useState("");
@@ -52,25 +52,11 @@ function ModalSettings({ settingsModal, setSettingsModal }) {
                     },
                 }
             );
-            setSettingsModal(false);
-            enqueueSnackbar("Updated successfully!", {
-                variant: "success",
-                anchorOrigin: {
-                    vertical: "bottom",
-                    horizontal: "right",
-                },
-                autoHideDuration: 1500,
-            });
-        } catch (err) {
-            enqueueSnackbar("Wrong!", {
-                variant: "error",
-                anchorOrigin: {
-                    vertical: "bottom",
-                    horizontal: "right",
-                },
-                autoHideDuration: 1500,
-            });
+            snackBar_success();
+        } catch (error) {
+            snackBar_error();
         }
+        setSettingsModal(false);
     };
 
     const getData = async () => {

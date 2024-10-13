@@ -7,7 +7,8 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useSnackbar } from "notistack";
+import { useCustomSnackBar } from "../hooks/useCustomSnackBar";
+
 const style = {
     position: "absolute",
     top: "50%",
@@ -30,51 +31,41 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ModalPassword({ passwordModal, setPasswordModal }) {
-    const { enqueueSnackbar } = useSnackbar();
+    const { snackBar_success, snackBar_error } = useCustomSnackBar();
     const ls_token = localStorage?.getItem("token");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
 
     const handleUpdate = async () => {
-        if (!newPassword || !confirmPassword || !currentPassword)
-            alert("Please fill all the fields");
-
-        setNewPassword(newPassword);
-        setConfirmPassword(confirmPassword);
-        setCurrentPassword(currentPassword);
-        if (newPassword !== confirmPassword)
+        if (!newPassword || !confirmPassword || !currentPassword) {
+            snackBar_error();
+            return alert("Please fill all the fields");
+        }
+        if (newPassword !== confirmPassword) {
+            snackBar_error();
             return alert("Passwords do not match!");
-
-        const condition = {
-            token: ls_token,
-            newPassword,
-            currentPassword,
-        };
-        await api()
-            .post("/user/updatePassword", condition)
-            .then(() => {
-                setPasswordModal(false);
-                setNewPassword("");
-                setConfirmPassword("");
-                setCurrentPassword("");
-                enqueueSnackbar("Password updated successfully!", {
-                    variant: "success",
-                    anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "right",
-                    },
-                    autoHideDuration: 1500,
-                });
-            })
-            .catch((err) => {
-                if (err.response.data.currentPasswordNotMatch) {
-                    return alert("Wrong current password!");
-                }
-                if (err.response.data.samePasswords) {
-                    return alert("Passwords are aldready same!");
-                }
+        }
+        try {
+            const response = await api().post("/user/updatePassword", {
+                token: ls_token,
+                newPassword,
+                currentPassword,
             });
+            setNewPassword("");
+            setConfirmPassword("");
+            setCurrentPassword("");
+            snackBar_success();
+        } catch (err) {
+            snackBar_error();
+            if (err.response.data.currentPasswordNotMatch) {
+                return alert("Wrong current password!");
+            }
+            if (err.response.data.samePasswords) {
+                return alert("Passwords are aldready same!");
+            }
+        }
+        setPasswordModal(false);
     };
 
     return (

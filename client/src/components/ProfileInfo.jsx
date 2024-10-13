@@ -3,6 +3,7 @@ import api from "../utils/api";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import ProfilePhotoUpdate from "./ProfilePhotoUpdate";
+import { useCustomSnackBar } from "../hooks/useCustomSnackBar";
 
 const Item = styled(Paper)(({ theme }) => ({
     fontFamily: "monospace",
@@ -13,6 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ProfileInfo() {
     // console.log("profile info rerendered");
+    const { snackBar_success, snackBar_error } = useCustomSnackBar();
     const ls_token = localStorage.getItem("token");
     const default_pp =
         import.meta.env.VITE_SERVER_URL +
@@ -38,7 +40,9 @@ function ProfileInfo() {
                 setUserProfilePhoto(
                     import.meta.env.VITE_SERVER_URL + response.data.user.pp_path
                 );
+                snackBar_success();
             } catch (error) {
+                snackBar_error();
                 console.error("Error uploading file:", error);
             }
         }

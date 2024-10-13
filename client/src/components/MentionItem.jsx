@@ -14,8 +14,10 @@ import { deletePost } from "../redux/features/post/postSlice";
 import ModalDeleteMentionItem from "./ModalDeleteMentionItem";
 import ModalUpdateMentionItem from "./ModalUpdateMentionItem";
 import useDateReturn from "../hooks/useDateReturn";
-
+import { useCustomSnackBar } from "../hooks/useCustomSnackBar";
 function MentionItem({ item }) {
+    const { snackBar_success, snackBar_error } = useCustomSnackBar();
+
     const { _id, topic, content, createdAt, updatedAt } = item;
     const ls_token = localStorage?.getItem("token");
 
@@ -25,11 +27,16 @@ function MentionItem({ item }) {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        const condition = {
-            _id,
-            token: ls_token,
-        };
-        dispatch(deletePost(condition));
+        try {
+            const condition = {
+                _id,
+                token: ls_token,
+            };
+            dispatch(deletePost(condition));
+            snackBar_success();
+        } catch (error) {
+            snackBar_error();
+        }
         setDeleteModal(false);
     };
 

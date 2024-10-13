@@ -7,10 +7,10 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { SnackbarProvider, useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
 import { updatePost } from "../redux/features/post/postSlice";
+import { useCustomSnackBar } from "../hooks/useCustomSnackBar";
 
 const style = {
     position: "absolute",
@@ -35,29 +35,26 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ModalUpdateMentionItem({ updateModal, setUpdateModal, item }) {
+    const { snackBar_success, snackBar_error } = useCustomSnackBar();
     const { _id, topic, content } = item;
     const ls_token = localStorage?.getItem("token");
     const dispatch = useDispatch();
-    const { enqueueSnackbar } = useSnackbar();
     const [newData, setNewData] = useState(content);
 
     const handleUpdate = () => {
-        setNewData(newData);
-        const condition = {
-            _id,
-            content: newData,
-            token: ls_token,
-        };
-        dispatch(updatePost(condition));
+        try {
+            setNewData(newData);
+            const condition = {
+                _id,
+                content: newData,
+                token: ls_token,
+            };
+            dispatch(updatePost(condition));
+            snackBar_success();
+        } catch (error) {
+            snackBar_error();
+        }
         setUpdateModal(false);
-        enqueueSnackbar("Data updated successfully!", {
-            variant: "success",
-            anchorOrigin: {
-                vertical: "bottom",
-                horizontal: "right",
-            },
-            autoHideDuration: 1500,
-        });
     };
 
     return (
