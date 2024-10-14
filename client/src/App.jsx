@@ -12,7 +12,7 @@ import Services from "./pages/Services";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./components/Logout";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
 function App() {
     // console.log("App is rendered.");
@@ -50,7 +50,7 @@ function App() {
 
                 <Route path="*" element={<Error />} />
             </Routes>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

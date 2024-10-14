@@ -90,7 +90,7 @@ function Profile() {
                                     My Last Mentions
                                 </Typography>
                             </Item>
-                            <Item>
+                            <Item sx={{ marginBottom: "25%" }}>
                                 {postsOfUser &&
                                     postsOfUser.map((item) => (
                                         <MentionItem

@@ -7,13 +7,17 @@
     padding: 0px;
     box-sizing: border-box;
 }
-// #root {
-//     width: 100%;
-//     height: auto;
-//     min-height: 100vh;
-//     background-color: linear-gradient(
-//         250deg,
-//         rgba(91, 91, 91),
-//         rgba(49, 49, 49)
-//     );
-// }
+
+/* Chrome, Edge ve Safari */
+::-webkit-scrollbar {
+    display: none;
+}
+/* Firefox */
+html {
+    scrollbar-width: none;
+}
+/* Other */
+html,
+body {
+    overflow: hidden;
+}

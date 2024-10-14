@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getAllPosts, postsTopic } from "../redux/features/post/postSlice";
 import PostTopicItem from "./PostTopicItem";
+import Footer from "./Footer";
 
 function PostsTopic() {
     const { slug } = useParams();
@@ -27,12 +28,13 @@ function PostsTopic() {
                 <>
                     <hr />
                     <div className="list">
-                        <ul>
+                        <ul style={{ height: "100%", minHeight: "100vh" }}>
                             {filteredPosts &&
                                 filteredPosts.map((post) => (
                                     <PostTopicItem key={post._id} post={post} />
                                 ))}
                         </ul>
+                        <Footer />
                     </div>
                 </>
             )}

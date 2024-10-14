@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../redux/features/post/postSlice";
 import PostItem from "./PostItem";
+import Footer from "./Footer";
 
 function Posts() {
     const { posts } = useSelector((state) => state.post);
@@ -21,6 +22,7 @@ function Posts() {
                             <PostItem key={post._id} post={post} />
                         ))}
                 </ul>
+                <Footer />
             </div>
         </div>
     );
