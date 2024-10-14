@@ -71,7 +71,7 @@ function ModalTopic({ show, setShow }) {
                 const condition = {
                     topic_name: newTopic,
                 };
-                console.log("newTopic: ", condition.topic_name);
+                // console.log("newTopic: ", condition.topic_name);
                 dispatch(addTopic(condition));
                 setNewTopicStatus(`Successfully created: ${newTopic}`);
                 snackBar_success();
