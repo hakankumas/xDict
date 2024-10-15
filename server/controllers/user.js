@@ -64,6 +64,13 @@ exports.getUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Successfully!", user });
 });
 
+exports.getUsername = asyncHandler(async (req, res) => {
+    const { username } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) return res.status(500).json({ status: "Failed!" });
+    res.status(200).json({ message: "Successfully!", user });
+});
+
 exports.updatePassword = asyncHandler(async (req, res) => {
     const { _id, password } = req.user;
     const { newPassword, currentPassword } = req.body;

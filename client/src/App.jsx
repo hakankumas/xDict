@@ -47,6 +47,7 @@ function App() {
                 <Route path="/logout" element={<Logout />} />
 
                 <Route path="/user/" element={<Home />} />
+                <Route path="/user/:paramUsername" element={<Home />} />
 
                 <Route path="*" element={<Error />} />
             </Routes>
