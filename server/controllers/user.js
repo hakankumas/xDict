@@ -44,19 +44,6 @@ exports.update = asyncHandler(async (req, res) => {
     res.status(200).json({ status: "Successfully updated!", updatedUser });
 });
 
-// exports.delete = asyncHandler(async (req, res) => {
-//     const { id } = req.params;
-//     const deletedUser = await User.findByIdAndDelete(id);
-//     if (!deletedUser) return res.status(500).json({ status: "Failed!" });
-//     res.status(200).json({ status: "Successfully deleted!", deletedUser });
-// });
-
-// exports.getAllUsers = asyncHandler(async (req, res) => {
-//     const users = await User.find();
-//     if (!users) return res.status(500).json({ status: "Failed!" });
-//     res.status(200).json({ status: "Successfully!", users });
-// });
-
 exports.getUser = asyncHandler(async (req, res) => {
     const { _id } = req.user;
     const user = await User.findById(_id);
