@@ -5,7 +5,7 @@ import Topics from "./Topics";
 import Posts from "./Posts";
 import PostsTopic from "./PostsTopic";
 import Profile from "./Profile";
-import Adverts from "./Adverts";
+import WhoAreWe from "./WhoAreWe";
 
 import UserPosts from "./UserPosts";
 import UserProfile from "./UserProfile";
@@ -29,7 +29,7 @@ function Timeline() {
                             {slug ? <PostsTopic /> : <Posts />}
                         </Grid>
                         <Grid size={3}>
-                            {sessionData ? <Profile /> : <Adverts />}
+                            {sessionData ? <Profile /> : <WhoAreWe />}
                         </Grid>
                     </>
                 ) : (
